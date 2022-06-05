@@ -1,8 +1,83 @@
+
+# Patternify Flex...
+...is a pixel editor that is able to put all your creativity in a JSON formated file, or plays a previous created record file.<br />
+        Patternify was originally developed by Sacha Greiff as a pattern generator (<a href="http://www.patternify.com">http://www.patternify.com</a>) and allowed it to create patterns with max. 10x10 pixels.
+        Now, the tool grew to this extended version with a variety of ways to draw shapes, text, or record it all to a file, on a grid sized up to 400 x 400 pixels.
+        After downloading the tool, it's recommended to run it on a local server, but it should also run locally with the file protocol (depending upon browser settings, I use it on firefox with file protocol without problems).
+        You will find more informations to the tool inside the tools menu (menu -> information).
+
+##### HTTP_GET Variables or HASH
+
+The tool comes with some GET / HASH variables, to call it with a preconfigurated size or matrix.
+
+Available variables are:
+
+* idleTime
+* width
+* height
+* xcursor
+* ycursor
+* size
+* cursors
+* matrix
+* color
+* destroybackup
+* destroykeys
+* lang
+
+#### Examples
+```
+idleTime=3000               <- Delay after minimizing, before hidden eyes wake up
+width=32                    <- Width of the grid
+height=32                   <- Height of the grid
+xcursor=10                  <- Use only the first 10 pixels per row
+ycursor=10                  <- Use only the first 10 pixels per column
+size=[width, height]        <- Shortcut to set width and height
+cursors=[x,y]               <- shortcut to set x and y limiter
+color={r:255,g:255,b:0,a:1} <- Preselect draw color and opacity
+destroybackup=1             <- Remove backup from the LocalStorage
+destroykeys=1               <- Remove custom keybindings from LocalStorage
+lang=de                     <- Sets the language to german (available: german, english)
+matrix={matrix:[matrix],... <- Sets the whole pattern
+
+...so you could do this (reloading the tool)...
+  .../index.html?width=32&height=32                         Start up with a 32x32 pixels grid.
+  .../index.html?xcursor=16&ycursor=16                      Set x and y limiter to 16x16 pixels.
+  .../index.html?width=32&height=32&xcursor=16&ycursor=16   Combines the last described.
+  .../index.html?size=[32,32]&cursors=[16,16]               Does the same as before, a shorter notation.
+  
+  When you use the hash (#) instead the ? in the url, changes are done without reloading.
+```
+
+#### Matrix-Example
+
+This shows a 10x10 pixel grid, limiters set
+    to 8x8 pixel, holding a 5x5 pixel matrix,
+    which shows a black border (1 pixel wide) with a transparent filling
+```sh
+matrix={
+ [
+  [[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1]],
+  [[255,255,255,1],0,0,0,[255,255,255,1]],
+  [[255,255,255,1],0,0,0,[255,255,255,1]],
+  [[255,255,255,1],0,0,0,[255,255,255,1]],
+  [[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1]]
+ ],
+ pixelsX:10,
+ pixelsY:10,
+ xcursor:8,
+ ycursor:8
+}
+
+Of course this is written in one line in the url, avoiding spaces, as a _GET variable.
+```
+#### Please read the infos inside this tool! There is much more to discover!
+
 # About the recLog file *.rec
 
 ###### The Rec data parent element ('recLog') is an array. This array consists of three child arrays:
 
-```sh
+```
 recLog = [a: record number][b: item number][c: [item]]
 
 recLog[a][b]    = [delay, mode, [item]]
@@ -13,7 +88,7 @@ recLog[a][b][2] = [property (, property2 (, property3)...)]
 
 ###### An example in JSON notation (the format of the recorded files):
 
-```sh
+```
 recLog = [                                  <-- record array
            [                                <-- items array
              [0,0,[matrix]],                <-- all records start with a header,
@@ -193,68 +268,5 @@ The following list shows the possible content of recLog[x][x][2] for all items:
                     draw-text: Text
                     font: Name of the Font Family
                     text-size: (size in pixels)px
-
-##### HTTP_GET Variables or HASH
-
-The tool comes with some GET / HASH variables, to call it with a preconfigurated size or matrix.
-
-Available variables are:
-
-* idleTime
-* width
-* height
-* xcursor
-* ycursor
-* size
-* cursors
-* matrix
-* color
-* destroybackup
-* destroykeys
-
-#### Examples
-```sh
-idleTime=3000               <- Delay after minimizing, before hidden eyes wake up
-width=32                    <- Width of the grid
-height=32                   <- Height of the grid
-xcursor=10                  <- Use only the first 10 pixels per row
-ycursor=10                  <- Use only the first 10 pixels per column
-size=[width, height]        <- Shortcut to set width and height
-cursors=[x,y]               <- shortcut to set x and y limiter
-color={r:255,g:255,b:0,a:1} <- Preselect draw color and opacity
-destroybackup=1             <- Remove backup from the LocalStorage
-destroykeys=1               <- Remove custom keybindings from LocalStorage
-matrix={matrix:[matrix],... <- Sets the whole pattern
-
-...so you could do this...
-  .../index.html?width=32&height=32                         Start up with a 32x32 pixels grid.
-  .../index.html?xcursor=16&ycursor=16                      Set x and y limiter to 16x16 pixels.
-  .../index.html?width=32&height=32&xcursor=16&ycursor=16   Combines the last described.
-  .../index.html?size=[32,32]&cursors=[16,16]               Does the same as before, a shorter notation.
-```
-
-#### Matrix-Example
-
-This shows a 10x10 pixel grid, limiters set
-    to 8x8 pixel, holding a 5x5 pixel matrix,
-    which shows a black border (1 pixel wide) with a transparent filling
-```sh
-matrix={
- [
-  [[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1]],
-  [[255,255,255,1],0,0,0,[255,255,255,1]],
-  [[255,255,255,1],0,0,0,[255,255,255,1]],
-  [[255,255,255,1],0,0,0,[255,255,255,1]],
-  [[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1],[255,255,255,1]]
- ],
- pixelsX:10,
- pixelsY:10,
- xcursor:8,
- ycursor:8
-}
-
-Of course this is written in one line in the url, avoiding spaces, as a _GET variable.
-```
-#### Please read the infos inside this tool! There is much more to discover!
 
 ### Have fun!
