@@ -307,7 +307,7 @@
                     language.active = languages.indexOf(l) > -1 ? l : "en";
                     str = language[language.active];
                     addScript([
-        				"session",
+        		"session",
                         "keys",
                         "customKeys",
                         "eyes",
@@ -320,24 +320,6 @@
                     );
                 }
             );
-
-        listDomElements = function() {
-            let domElements = get("*");
-            window.gui_object = [];
-            nodes = {};
-            [].forEach.call(domElements, e => {
-                let obj = {};
-                obj.tagName = e.tagName;
-                    [].forEach.call(e.attributes, node => nodes[node.nodeName] = node.nodeValue);
-                    if (e.innerText) nodes.innerText = e.innerText;
-                    obj.nodes = nodes;
-                    gui_object.push(obj);
-                    obj = {};
-                    nodes = {};
-            });
-                console.log(gui_object);
-        };
-
     </script>
 </body>
 </html>
