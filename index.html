@@ -282,7 +282,7 @@
     <script type="text/javascript">
 
         // IF NO CONSOLE IS AVAILABLE (IN ANDROID BROWSER FOR EXAMPLE), WE COME ALONG WITH OUR OWN
-        //!console && */addScript("eruda.min.js", () => eruda.init());
+        !console && addScript("console.js");
 
         // LOAD LANGUAGE FILE DEPENDING UPON HTTP-GET VARIABLE (...html?lang=en) AND BROWSER LANGUAGE
         // WE ENSURE THAT THE SCRIPTS ARE LOADED IN THE CORRECT ORDER SO THAT ALL SCRIPTS BASED ON OTHER SCRIPTS FIND THEM FULLY LOADED.
