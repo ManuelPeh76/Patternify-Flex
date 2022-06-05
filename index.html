@@ -301,8 +301,7 @@
                 "spectrum.1.8.1",
                 "firebase.min",
                 "alertism",
-                "functions",
-                "runAsync"], () => {
+                "functions"], () => {
                     let l = (_GET("lang") || navigator.language || navigator.userLanguage || navigator.browserLanguage).substring(0, 2);
                     language.active = languages.indexOf(l) > -1 ? l : "en";
                     str = language[language.active];
